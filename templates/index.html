@@ -1,14 +1,195 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" />
+
     <title>Atividades</title>
 
-    <script defer src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/htmx.org@2.0.10/dist/htmx.min.js" integrity="sha384-H5SrcfygHmAuTDZphMHqBJLc3FhssKjG7w/CeCpFReSfwBWDTKpkzPP8c+cLsK+V" crossorigin="anonymous"></script>
-</head>
-<body>
-    <button class="bg-blue-500 text-white px-4 py-2 rounded-md" hx-swap="outerHTML" hx-get="/clicked" hx-trigger="click">Click me</button>
-</body>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.violet.min.css"
+    />
+
+    <style>
+      :root {
+        --pico-font-family-sans-serif: Inter, system-ui, "Segoe UI", Roboto,
+          Oxygen, Ubuntu, Cantarell, Helvetica, Arial, "Helvetica Neue",
+          sans-serif, var(--pico-font-family-emoji);
+        --pico-font-size: 87.5%;
+        /* Original: 100% */
+        --pico-line-height: 1.25;
+        /* Original: 1.5 */
+        --pico-form-element-spacing-vertical: 0.5rem;
+        /* Original: 1rem */
+        --pico-form-element-spacing-horizontal: 1rem;
+        /* Original: 1.25rem */
+        --pico-border-radius: 0.375rem;
+        /* Original: 0.25rem */
+      }
+
+      @media (min-width: 576px) {
+        :root {
+          --pico-font-size: 87.5%;
+          /* Original: 106.25% */
+        }
+      }
+
+      @media (min-width: 768px) {
+        :root {
+          --pico-font-size: 87.5%;
+          /* Original: 112.5% */
+        }
+      }
+
+      @media (min-width: 1024px) {
+        :root {
+          --pico-font-size: 87.5%;
+          /* Original: 118.75% */
+        }
+      }
+
+      @media (min-width: 1280px) {
+        :root {
+          --pico-font-size: 87.5%;
+          /* Original: 125% */
+        }
+      }
+
+      @media (min-width: 1536px) {
+        :root {
+          --pico-font-size: 87.5%;
+          /* Original: 131.25% */
+        }
+      }
+
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        --pico-font-weight: 600;
+        /* Original: 700 */
+      }
+
+      article {
+        border: 1px solid var(--pico-muted-border-color);
+        /* Original doesn't have a border */
+        border-radius: calc(var(--pico-border-radius) * 2);
+        /* Original: var(--pico-border-radius) */
+      }
+
+      article > footer {
+        border-radius: calc(var(--pico-border-radius) * 2);
+        /* Original: var(--pico-border-radius) */
+      }
+    </style>
+
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"
+    ></script>
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/htmx.org@2.0.10/dist/htmx.min.js"
+      integrity="sha384-H5SrcfygHmAuTDZphMHqBJLc3FhssKjG7w/CeCpFReSfwBWDTKpkzPP8c+cLsK+V"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <main class="container-fluid">
+      <form
+        hx-post="/activity/create"
+        hx-target="#tables"
+        hx-swap="innerHTML"
+        class="container"
+      >
+        <fieldset class="grid">
+          <label>
+            Nome da atividade:
+            <input type="text" name="name" placeholder="Nome da atividade" />
+          </label>
+          <label>
+            Descrição da atividade:
+            <input
+              type="text"
+              name="description"
+              placeholder="Descrição da atividade"
+            />
+          </label>
+          <label>
+            Participantes:
+            <input
+              type="number"
+              name="participants"
+              placeholder="Participantes"
+            />
+          </label>
+        </fieldset>
+        <fieldset class="grid">
+          <label>
+            Data de início:
+            <input
+              type="datetime-local"
+              name="start_time"
+              placeholder="Dificuldade da atividade"
+            />
+          </label>
+          <label>
+            Data de término:
+            <input
+              type="datetime-local"
+              name="end_time"
+              placeholder="Data de término"
+            />
+          </label>
+          <label>
+            Prioridade:
+            <select name="priority">
+              <option value="1">Baixa</option>
+              <option value="2">Normal</option>
+              <option value="3">Alta</option>
+              <option value="4">Muito alta</option>
+              <option value="5">Crítica</option>
+            </select>
+          </label>
+        </fieldset>
+        <button>Adicionar</button>
+      </form>
+      <section id="tables" class="mt-4">{% include "_tables.html" %}</section>
+
+      <button hx-post="/activity/clear" hx-target="#tables" hx-swap="innerHTML">
+        Limpar atividades
+      </button>
+
+      <button
+        hx-post="/activity/create-random"
+        hx-target="#tables"
+        hx-swap="innerHTML"
+        hx-vals="js:{count: 5}"
+      >
+        Adicionar 5 atividades aleatórias
+      </button>
+
+      <button
+        hx-post="/activity/create-random"
+        hx-target="#tables"
+        hx-swap="innerHTML"
+        hx-vals="js:{count: 10}"
+      >
+        Adicionar 10 atividades aleatórias
+      </button>
+
+      <button
+        hx-post="/activity/create-random"
+        hx-target="#tables"
+        hx-swap="innerHTML"
+        hx-vals="js:{count: 30}"
+      >
+        Adicionar 30 atividades aleatórias
+      </button>
+    </main>
+  </body>
 </html>

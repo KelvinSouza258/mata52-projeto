@@ -1,0 +1,28 @@
+<tr>
+  <td>{{ activity.name }}</td>
+  <td>{{ activity.description }}</td>
+  <td>{{ activity.start_time | datetime_ptbr }}</td>
+  <td>{{ activity.end_time | datetime_ptbr }}</td>
+  <td>
+    {% if activity.priority == 1 %}Baixa {% elif activity.priority == 2 %}Normal
+    {% elif activity.priority == 3 %}Alta {% elif activity.priority == 4 %}Muito
+    alta {% elif activity.priority == 5 %}Crítica {% else %}{{ activity.priority
+    }} {% endif %}
+  </td>
+  <td>{{ activity.participants }}</td>
+  <td>{{ activity.weight }}</td>
+  {% if show_delete %}
+  <td>
+    <button
+      type="button"
+      class="outline secondary"
+      hx-post="/activity/delete"
+      hx-vals='{"id": {{ activity.id }}}'
+      hx-target="#tables"
+      hx-swap="innerHTML"
+    >
+      Excluir
+    </button>
+  </td>
+  {% endif %}
+</tr>

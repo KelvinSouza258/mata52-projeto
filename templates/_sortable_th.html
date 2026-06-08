@@ -1,0 +1,14 @@
+{% macro sortable_th(label, url, key, target) %}
+<th
+  scope="col"
+  class="!cursor-pointer select-noned"
+  data-dir="asc"
+  hx-post="{{ url }}"
+  hx-vals="js:{key: '{{ key }}', dir: this.dataset.dir}"
+  hx-target="{{ target }}"
+  hx-swap="innerHTML"
+  hx-on::after-request="this.dataset.dir = this.dataset.dir === 'asc' ? 'desc' : 'asc'; this.querySelector('[data-sort-icon]').textContent = this.dataset.dir === 'asc' ? '↑' : '↓'"
+>
+  {{ label }} <span data-sort-icon aria-hidden="true">↑</span>
+</th>
+{% endmacro %}

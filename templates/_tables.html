@@ -1,0 +1,53 @@
+{% from "_sortable_th.html" import sortable_th %}
+<h2>Atividades cadastradas</h2>
+<div class="overflow-auto">
+  <table>
+    <thead>
+      <tr>
+        {{ sortable_th("Nome", "/activities/sort", ":name", "#activities") }} {{
+        sortable_th("Descrição", "/activities/sort", ":description",
+        "#activities") }} {{ sortable_th("Data de início", "/activities/sort",
+        ":start_time", "#activities") }} {{ sortable_th("Data de término",
+        "/activities/sort", ":end_time", "#activities") }} {{
+        sortable_th("Prioridade", "/activities/sort", ":priority",
+        "#activities") }} {{ sortable_th("Participantes", "/activities/sort",
+        ":participants", "#activities") }} {{ sortable_th("Peso",
+        "/activities/sort", ":weight", "#activities") }}
+        <th scope="col">Ações</th>
+      </tr>
+    </thead>
+    <tbody id="activities">
+      {% for activity in activities %}{% with show_delete=true %}{% include
+      "_activity_row.html" %}{% endwith %}{% endfor %}
+    </tbody>
+  </table>
+</div>
+
+{% for result in [schedule.classic, schedule.dp] %}
+<details>
+  <summary>
+    <strong>{{ result.label }}</strong>
+    &mdash; {{ result.count }} atividade{{ "s" if result.count != 1 }}, peso {{
+    result.total_weight }}, {{ "%.4f"|format(result.elapsed_ms) }} ms
+  </summary>
+  <div class="overflow-auto">
+    <table>
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>Descrição</th>
+          <th>Data de início</th>
+          <th>Data de término</th>
+          <th>Prioridade</th>
+          <th>Participantes</th>
+          <th>Peso</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for activity in result.items %}{% include "_activity_row.html" %}{%
+        endfor %}
+      </tbody>
+    </table>
+  </div>
+</details>
+{% endfor %}

@@ -1,0 +1,52 @@
+[
+  {
+    "id": 2,
+    "name": "Atividade 2",
+    "description": "Descri\u00e7\u00e3o aleat\u00f3ria 7635",
+    "start_time": "2026-06-09T10:00:00",
+    "end_time": "2026-06-09T13:00:00",
+    "priority": 3,
+    "participants": 4,
+    "weight": 3
+  },
+  {
+    "id": 4,
+    "name": "Atividade 4",
+    "description": "Descri\u00e7\u00e3o aleat\u00f3ria 9241",
+    "start_time": "2026-06-09T13:00:00",
+    "end_time": "2026-06-09T17:00:00",
+    "priority": 1,
+    "participants": 13,
+    "weight": 3
+  },
+  {
+    "id": 1,
+    "name": "Atividade 1",
+    "description": "Descri\u00e7\u00e3o aleat\u00f3ria 2781",
+    "start_time": "2026-06-10T09:00:00",
+    "end_time": "2026-06-10T11:00:00",
+    "priority": 5,
+    "participants": 12,
+    "weight": 7
+  },
+  {
+    "id": 3,
+    "name": "Atividade 3",
+    "description": "Descri\u00e7\u00e3o aleat\u00f3ria 2151",
+    "start_time": "2026-06-10T09:00:00",
+    "end_time": "2026-06-10T13:00:00",
+    "priority": 5,
+    "participants": 16,
+    "weight": 8
+  },
+  {
+    "id": 5,
+    "name": "Atividade 5",
+    "description": "Descri\u00e7\u00e3o aleat\u00f3ria 3604",
+    "start_time": "2026-06-10T10:00:00",
+    "end_time": "2026-06-10T14:00:00",
+    "priority": 4,
+    "participants": 34,
+    "weight": 10
+  }
+]
