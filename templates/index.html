@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
@@ -14,9 +14,10 @@
 
     <style>
       :root {
-        --pico-font-family-sans-serif: Inter, system-ui, "Segoe UI", Roboto,
-          Oxygen, Ubuntu, Cantarell, Helvetica, Arial, "Helvetica Neue",
-          sans-serif, var(--pico-font-family-emoji);
+        --pico-font-family-sans-serif:
+          Inter, system-ui, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell,
+          Helvetica, Arial, 'Helvetica Neue', sans-serif,
+          var(--pico-font-family-emoji);
         --pico-font-size: 87.5%;
         /* Original: 100% */
         --pico-line-height: 1.25;
@@ -27,51 +28,6 @@
         /* Original: 1.25rem */
         --pico-border-radius: 0.375rem;
         /* Original: 0.25rem */
-      }
-
-      @media (min-width: 576px) {
-        :root {
-          --pico-font-size: 87.5%;
-          /* Original: 106.25% */
-        }
-      }
-
-      @media (min-width: 768px) {
-        :root {
-          --pico-font-size: 87.5%;
-          /* Original: 112.5% */
-        }
-      }
-
-      @media (min-width: 1024px) {
-        :root {
-          --pico-font-size: 87.5%;
-          /* Original: 118.75% */
-        }
-      }
-
-      @media (min-width: 1280px) {
-        :root {
-          --pico-font-size: 87.5%;
-          /* Original: 125% */
-        }
-      }
-
-      @media (min-width: 1536px) {
-        :root {
-          --pico-font-size: 87.5%;
-          /* Original: 131.25% */
-        }
-      }
-
-      h1,
-      h2,
-      h3,
-      h4,
-      h5,
-      h6 {
-        --pico-font-weight: 600;
-        /* Original: 700 */
       }
 
       article {
@@ -100,12 +56,8 @@
   </head>
   <body>
     <main class="container-fluid">
-      <form
-        hx-post="/activity/create"
-        hx-target="#tables"
-        hx-swap="innerHTML"
-        class="container"
-      >
+      <form hx-post="/activity/create" hx-target="#tables" hx-swap="innerHTML">
+        <h2>Adicionar atividade</h2>
         <fieldset class="grid">
           <label>
             Nome da atividade:
@@ -156,15 +108,23 @@
             </select>
           </label>
         </fieldset>
+
         <button>Adicionar</button>
       </form>
-      <section id="tables" class="mt-4">{% include "_tables.html" %}</section>
 
-      <button hx-post="/activity/clear" hx-target="#tables" hx-swap="innerHTML">
+      <hr />
+
+      <button
+        class="outline"
+        hx-post="/activity/clear"
+        hx-target="#tables"
+        hx-swap="innerHTML"
+      >
         Limpar atividades
       </button>
 
       <button
+        class="outline"
         hx-post="/activity/create-random"
         hx-target="#tables"
         hx-swap="innerHTML"
@@ -174,6 +134,7 @@
       </button>
 
       <button
+        class="outline"
         hx-post="/activity/create-random"
         hx-target="#tables"
         hx-swap="innerHTML"
@@ -183,6 +144,7 @@
       </button>
 
       <button
+        class="outline"
         hx-post="/activity/create-random"
         hx-target="#tables"
         hx-swap="innerHTML"
@@ -190,6 +152,8 @@
       >
         Adicionar 30 atividades aleatórias
       </button>
+
+      <section id="tables" class="mt-4">{% include "_tables.html" %}</section>
     </main>
   </body>
 </html>
